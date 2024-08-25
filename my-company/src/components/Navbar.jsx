@@ -5,6 +5,7 @@ function Navbar() {
     const navStyle = {
         backgroundColor: '#333',
         padding: '1rem',
+        justifyContent:"center"
       };
     
       const ulStyle = {
