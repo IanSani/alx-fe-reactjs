@@ -1,10 +1,9 @@
 // src/recipeStore.js
 import create from 'zustand';
 
-// src/stores/recipeStore.js
-import create from 'zustand';
 
-export const useRecipeStore = create((set) => ({
+
+const useRecipeStore = create((set) => ({
   recipes: [],
 
   addRecipe: (recipe) => set((state) => ({
