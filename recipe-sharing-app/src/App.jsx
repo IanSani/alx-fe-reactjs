@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import RecipeList from './components/RecipeList'
 import AddRecipeForm from './components/AddRecipeForm'
-import {recipeStore} from './components/recipeStore'
+import {recipeStore} from './recipeStore'
 
 function App() {
   
