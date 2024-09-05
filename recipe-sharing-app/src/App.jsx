@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import RecipeList from './components/RecipeList'
 import AddRecipeForm from './components/AddRecipeForm'
-import {recipeStore} from './recipeStore'
+import {useRecipeStore} from './recipeStore'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
