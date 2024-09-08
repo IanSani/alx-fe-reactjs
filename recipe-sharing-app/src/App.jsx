@@ -20,7 +20,7 @@ function App() {
             path="/" 
             element={
               <>
-                {/* Add SearchBar and FilterBar components here */}
+                {/* Add SearchBar and FilterBar  here */}
                 <SearchBar />
                 <FilterBar />
                 <RecipeList />
