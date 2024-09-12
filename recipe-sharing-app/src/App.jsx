@@ -10,6 +10,7 @@ import SearchBar from './components/SearchBar'; // Import SearchBar
 import FilterBar from './components/FilterBar'; // Import FilterBar
 import Home from './components/Home'; // Import Home if needed
 import RecipeDetails from './components/RecipeDetails'; // Import RecipeDetails if needed
+import EditRecipeForm from './components/EditRecipeForm';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
                 <SearchBar />
                 <FilterBar />
                 <RecipeList />
+                <EditRecipeForm />
+                <AddRecipeForm  />
               </>
             } 
           />
