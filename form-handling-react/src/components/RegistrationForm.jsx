@@ -1,27 +1,30 @@
 import  { useState } from 'react';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
-
+  // Define separate state variables for each input
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+
+    // Update the corresponding state variable based on the input name
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
   };
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.username) newErrors.username = "Username is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    if (!username) newErrors.username = "Username is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
     return newErrors;
   };
 
@@ -31,7 +34,7 @@ const RegistrationForm = () => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', { username, email, password });
       // Here you can call your API to register the user
     }
   };
@@ -44,7 +47,7 @@ const RegistrationForm = () => {
           <input
             type="text"
             name="username"
-            value={formData.username} // Controlled input
+            value={username} // Controlled input directly using username state
             onChange={handleChange}
           />
         </label>
@@ -56,7 +59,7 @@ const RegistrationForm = () => {
           <input
             type="email"
             name="email"
-            value={formData.email} // Controlled input
+            value={email} // Controlled input directly using email state
             onChange={handleChange}
           />
         </label>
@@ -68,7 +71,7 @@ const RegistrationForm = () => {
           <input
             type="password"
             name="password"
-            value={formData.password} // Controlled input
+            value={password} // Controlled input directly using password state
             onChange={handleChange}
           />
         </label>
