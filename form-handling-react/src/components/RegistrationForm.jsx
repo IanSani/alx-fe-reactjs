@@ -44,7 +44,7 @@ const RegistrationForm = () => {
           <input
             type="text"
             name="username"
-            value={formData.username}
+            value={formData.username} // Controlled input
             onChange={handleChange}
           />
         </label>
@@ -56,7 +56,7 @@ const RegistrationForm = () => {
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={formData.email} // Controlled input
             onChange={handleChange}
           />
         </label>
@@ -68,7 +68,7 @@ const RegistrationForm = () => {
           <input
             type="password"
             name="password"
-            value={formData.password}
+            value={formData.password} // Controlled input
             onChange={handleChange}
           />
         </label>
