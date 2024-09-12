@@ -13,7 +13,10 @@ function App() {
     return (
       <Router>
       <Routes>
-        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} /> {/* Add the Profile route */}
+        <Route path="/blog/:id" element={<BlogPost />} /> {/* Add the BlogPost route */}
         {/* Add other routes here as needed */}
       </Routes>
     </Router>
