@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import PostsComponent from './components/PostsComponent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BlogPost from './components/BlogPost'; 
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import { AuthProvider } from './components/AuthContext'; // Import AuthProvider
 
 import './App.css'
 
