@@ -1,4 +1,4 @@
-
+// SearchBar.js
 import { useRecipeStore } from './recipeStore';
 
 const SearchBar = () => {

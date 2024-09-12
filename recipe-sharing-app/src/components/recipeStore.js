@@ -48,28 +48,34 @@ const useRecipeStore = create((set) => ({
 
   // Set search term for title and ingredients
   setSearchTerm: (term) => set(state => {
-    state.searchTerm = term;
-    state.filterRecipes();
+    const updatedTerm = term;
+    return {
+      searchTerm: updatedTerm,
+      filteredRecipes: state.filterRecipes(state.recipes, updatedTerm, state.searchPreparationTime)
+    };
   }),
 
   // Set search term for preparation time
   setSearchPreparationTime: (time) => set(state => {
-    state.searchPreparationTime = time;
-    state.filterRecipes();
+    const updatedTime = time;
+    return {
+      searchPreparationTime: updatedTime,
+      filteredRecipes: state.filterRecipes(state.recipes, state.searchTerm, updatedTime)
+    };
   }),
 
   // Filter recipes based on search terms
-  filterRecipes: () => set(state => ({
-    filteredRecipes: state.recipes.filter(recipe => {
-      const searchTitle = recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase());
+  filterRecipes: (recipes, searchTerm, searchPreparationTime) => {
+    return recipes.filter(recipe => {
+      const searchTitle = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
       const searchIngredients = recipe.ingredients.some(ingredient =>
-        ingredient.toLowerCase().includes(state.searchTerm.toLowerCase())
+        ingredient.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      const searchTime = state.searchPreparationTime === null || 
-        (recipe.preparationTime && recipe.preparationTime <= state.searchPreparationTime);
+      const searchTime = searchPreparationTime === null || 
+        (recipe.preparationTime && recipe.preparationTime <= searchPreparationTime);
       return (searchTitle || searchIngredients) && searchTime;
-    })
-  })),
+    });
+  },
 }));
 
 export { useRecipeStore };

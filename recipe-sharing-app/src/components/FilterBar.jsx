@@ -1,24 +1,22 @@
-import  { useState } from 'react';
+// FilterBar.js
 import { useRecipeStore } from './recipeStore';
 
 const FilterBar = () => {
-  const setSearchTerm = useRecipeStore(state => state.setSearchTerm);
-  const [timeFilter, setTimeFilter] = useState('');
-  
-  const handleTimeFilterChange = (e) => {
-    setTimeFilter(e.target.value);
-    setSearchTerm(e.target.value); // Optionally filter by time
-  };
+  const setIngredientFilter = useRecipeStore(state => state.setIngredientFilter);
+  const setCookingTimeFilter = useRecipeStore(state => state.setCookingTimeFilter);
 
   return (
     <div>
       <input
         type="text"
-        placeholder="Filter by time (in minutes)"
-        value={timeFilter}
-        onChange={handleTimeFilterChange}
+        placeholder="Filter by ingredient"
+        onChange={(e) => setIngredientFilter(e.target.value)}
       />
-      {/* Add other filter options here */}
+      <input
+        type="number"
+        placeholder="Max cooking time (minutes)"
+        onChange={(e) => setCookingTimeFilter(e.target.value ? parseInt(e.target.value) : null)}
+      />
     </div>
   );
 };
