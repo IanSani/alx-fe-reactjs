@@ -3,13 +3,21 @@ import { create } from 'zustand';
 const useRecipeStore = create((set) => ({
   recipes: [],
   searchTerm: '',
+  searchPreparationTime: null, // New state for searching by preparation time
   filteredRecipes: [],
   favorites: [],
-  addFavorite: (recipeId) => set(state => ({ favorites: [...state.favorites, recipeId] })),
+  
+  // Actions for favorites
+  addFavorite: (recipeId) => set(state => ({
+    favorites: [...state.favorites, recipeId]
+  })),
+  
   removeFavorite: (recipeId) => set(state => ({
     favorites: state.favorites.filter(id => id !== recipeId)
   })),
+  
   recommendations: [],
+  
   generateRecommendations: () => set(state => {
     // Mock implementation based on favorites
     const recommended = state.recipes.filter(recipe =>
@@ -36,21 +44,30 @@ const useRecipeStore = create((set) => ({
   })),
 
   // Set the entire recipes array
-  setRecipes: (recipes) => set({ recipes }), // Add this method
+  setRecipes: (recipes) => set({ recipes }),
+
+  // Set search term for title and ingredients
   setSearchTerm: (term) => set(state => {
-    // Set search term and trigger recipe filtering
     state.searchTerm = term;
     state.filterRecipes();
   }),
-  
+
+  // Set search term for preparation time
+  setSearchPreparationTime: (time) => set(state => {
+    state.searchPreparationTime = time;
+    state.filterRecipes();
+  }),
+
+  // Filter recipes based on search terms
   filterRecipes: () => set(state => ({
     filteredRecipes: state.recipes.filter(recipe => {
       const searchTitle = recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase());
       const searchIngredients = recipe.ingredients.some(ingredient =>
         ingredient.toLowerCase().includes(state.searchTerm.toLowerCase())
       );
-      const searchTime = recipe.preparationTime && recipe.preparationTime <= state.searchTerm;
-      return searchTitle || searchIngredients || searchTime;
+      const searchTime = state.searchPreparationTime === null || 
+        (recipe.preparationTime && recipe.preparationTime <= state.searchPreparationTime);
+      return (searchTitle || searchIngredients) && searchTime;
     })
   })),
 }));
