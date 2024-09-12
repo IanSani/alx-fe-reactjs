@@ -2,9 +2,11 @@
 export default {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   content: [],
+  darkMode: false,
   theme: {
     extend: {},
   },
+  variants: { extend: {} },
   plugins: [],
 }
 
