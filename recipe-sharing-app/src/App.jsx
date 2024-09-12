@@ -2,7 +2,8 @@
 import './App.css';
 import RecipeList from './components/RecipeList';
 import AddRecipeForm from './components/AddRecipeForm';
-
+import FavoritesList from './components/FavoriteList';  
+import RecommendationsList from './components/RecommendationsList';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchBar from './components/SearchBar'; // Import SearchBar
 import FilterBar from './components/FilterBar'; // Import FilterBar
@@ -25,6 +26,8 @@ function App() {
                 <RecipeList />
                 <EditRecipeForm />
                 <AddRecipeForm  />
+                <FavoritesList />
+                <RecommendationsList />
               </>
             } 
           />
