@@ -12,7 +12,7 @@ This project demonstrates the integration of **Tailwind CSS** into a **React** a
 
 ## Installation
 Clone the repository, then run:
-.......
+
 ```bash
 npm install
 npm run dev
