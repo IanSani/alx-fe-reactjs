@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
@@ -17,7 +17,7 @@ const Search = () => {
       const userData = await fetchUserData(username);
       setUser(userData);
     } catch (err) {
-      setError(err.message);
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -44,6 +44,7 @@ const Search = () => {
         <div className="user-info mt-4">
           <img src={user.avatar_url} alt={user.name} className="rounded-full w-24 h-24 mx-auto" />
           <h1 className="text-xl text-center mt-2">{user.name}</h1>
+          <p className="text-center">Username: {user.login}</p> {/* Display the login field */}
           <p className="text-center">
             <a href={user.html_url} target="_blank" rel="noreferrer" className="text-blue-500">
               Visit GitHub Profile
