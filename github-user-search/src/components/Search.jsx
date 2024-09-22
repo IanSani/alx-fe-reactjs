@@ -21,16 +21,27 @@ const Search = ({ setUserData, setLoading, setError }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="search-form">
-      <input
-        type="text"
-        placeholder="Enter GitHub username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="search-form">
+        <input
+          type="text"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {/* Display user information if available */}
+      {setUserData && (
+        <div className="user-info">
+          <img src={setUserData.avatar_url} alt={setUserData.login} />
+          <h3>{setUserData.name || setUserData.login}</h3>
+          <a href={setUserData.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
+        </div>
+      )}
+    </div>
   );
 };
 
