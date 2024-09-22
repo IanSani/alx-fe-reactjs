@@ -6,7 +6,7 @@ const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState(''); // Added state for location
   const [minRepos, setMinRepos] = useState(''); // Added state for minimum repositories
-  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState([]); // Changed from single user to an array of users
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -14,17 +14,17 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUser(null);
+    setUsers([]); // Reset users
 
     try {
       const userData = await fetchUserData(username, location, minRepos); // Pass location and minRepos to fetchUserData
       if (userData.length === 0) {
-        setError("Looks like we can't find the user");
+        setError("Looks like we can't find any users");
       } else {
-        setUser(userData[0]); // Display the first matching user
+        setUsers(userData); // Set the array of users
       }
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we can't find any users");
     } finally {
       setLoading(false);
     }
@@ -61,16 +61,20 @@ const Search = () => {
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      {user && (
+      {users.length > 0 && (
         <div className="user-info mt-4">
-          <img src={user.avatar_url} alt={user.name} className="rounded-full w-24 h-24 mx-auto" />
-          <h1 className="text-xl text-center mt-2">{user.name}</h1>
-          <p className="text-center">Username: {user.login}</p>
-          <p className="text-center">
-            <a href={user.html_url} target="_blank" rel="noreferrer" className="text-blue-500">
-              Visit GitHub Profile
-            </a>
-          </p>
+          {users.map((user) => (
+            <div key={user.id} className="mb-6">
+              <img src={user.avatar_url} alt={user.name} className="rounded-full w-24 h-24 mx-auto" />
+              <h1 className="text-xl text-center mt-2">{user.name}</h1>
+              <p className="text-center">Username: {user.login}</p>
+              <p className="text-center">
+                <a href={user.html_url} target="_blank" rel="noreferrer" className="text-blue-500">
+                  Visit GitHub Profile
+                </a>
+              </p>
+            </div>
+          ))}
         </div>
       )}
     </div>
