@@ -33,9 +33,9 @@ const Search = ({ setUserData, setLoading, setError }) => {
         />
         <button type="submit">Search</button>
       </form>
-      
+
       {/* Display error message if there's an error */}
-      {error && <p>{error}</p>}
+      {setError && <p>{setError}</p>}
     </div>
   );
 };

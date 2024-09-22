@@ -10,7 +10,11 @@ const App = () => {
   return (
     <div className="app">
       <h1>GitHub User Search</h1>
-      <Search setUserData={setUserData} setLoading={setLoading} setError={setError} />
+      <Search 
+        setUserData={setUserData} 
+        setLoading={setLoading} 
+        setError={setError} 
+      />
       
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
