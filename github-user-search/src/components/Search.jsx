@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
@@ -17,7 +17,7 @@ const Search = () => {
       const userData = await fetchUserData(username);
       setUser(userData);
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we cant find the user"); // Corrected: Removed apostrophe
     } finally {
       setLoading(false);
     }
