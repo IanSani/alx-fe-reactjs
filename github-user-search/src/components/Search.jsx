@@ -14,6 +14,7 @@ const Search = ({ setUserData, setLoading, setError }) => {
       const userData = await fetchUserData(username);
       setUserData(userData);
     } catch (error) {
+      // Set the error message if the user is not found
       setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
@@ -32,15 +33,9 @@ const Search = ({ setUserData, setLoading, setError }) => {
         />
         <button type="submit">Search</button>
       </form>
-
-      {/* Display user information if available */}
-      {setUserData && (
-        <div className="user-info">
-          <img src={setUserData.avatar_url} alt={setUserData.login} />
-          <h3>{setUserData.name || setUserData.login}</h3>
-          <a href={setUserData.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
-        </div>
-      )}
+      
+      {/* Display error message if there's an error */}
+      {error && <p>{error}</p>}
     </div>
   );
 };
