@@ -1,14 +1,22 @@
 // src/components/Search.jsx
-import  { useState } from 'react';
+import React, { useState } from 'react';
+import { fetchUserData } from '../services/githubService';
 
-const Search = ({ onSearch }) => {
+const Search = ({ setUserData, setLoading, setError }) => {
   const [username, setUsername] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (username.trim()) {
-      onSearch(username);
-      setUsername('');
+    setLoading(true);
+    setError(null); // Reset error state before fetching
+
+    try {
+      const userData = await fetchUserData(username);
+      setUserData(userData);
+    } catch (error) {
+      setError("Looks like we can't find the user");
+    } finally {
+      setLoading(false);
     }
   };
 
